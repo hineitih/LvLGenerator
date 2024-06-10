@@ -325,6 +325,57 @@ MonoBehaviour:
   repeatNum: 10
   dirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
   grass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
+--- !u!1 &1146318033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146318035}
+  - component: {fileID: 1146318034}
+  m_Layer: 0
+  m_Name: SBPCG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1146318034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146318033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b8678bf361c4b1f88fe18742c8e75f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 100
+  height: 0
+  dirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
+  grass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
+  water: {fileID: 6358660848567398097, guid: 01e31230e0f404fe69006a874669dd6f, type: 3}
+  flower: {fileID: 8597505656953992864, guid: 19f072dc48cdd43029ca56b7e3f544ea, type: 3}
+  block: {fileID: 5000019977177368136, guid: 62202c131c194469f81a7d78cab1a82a, type: 3}
+--- !u!4 &1146318035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146318033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 165.70192, y: 36.39396, z: 0.81697714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1160672586
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +424,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1343038906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343038908}
+  - component: {fileID: 1343038907}
+  m_Layer: 0
+  m_Name: RoughProGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1343038907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343038906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecd62cb1823d404ca6105a726c2bae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 100
+  baseHeight: 0
+  plainProportion: 1
+  slopeProportion: 1
+  holeProportion: 3
+  hillProportion: 0
+  valleyProportion: 0
+  selectAltPlain: 1
+  dirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
+  grass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
+  altDirt: {fileID: 0}
+  altGrass: {fileID: 0}
+  plainMinWidth: 10
+  plainMaxWidth: 20
+  slopeMinWidth: 10
+  slopeMaxWidth: 30
+  slopeStepMinWidth: 1
+  slopeStepMaxWidth: 3
+  slopeStepMinHeight: 1
+  slopeStepMaxHeight: 3
+  holeMinWidth: 3
+  holeMaxWidth: 7
+  holePlatformAppearanceTreshold: 5
+  hillMinWidth: 20
+  hillMaxWidth: 40
+  hillStepMinWidth: 2
+  hillStepMaxWidth: 4
+  valleyMinWidth: 15
+  valleyMaxWidth: 30
+  valleyStepMinWidth: 1
+  valleyStepMaxWidth: 3
+  altPlainProbability: 33
+  altMinWidth: 3
+  altPlainMinHeightDiff: 5
+  altPlainMaxHeightDiff: 10
+--- !u!4 &1343038908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343038906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.7598, y: 6.3714223, z: -0.10358521}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -381,3 +511,5 @@ SceneRoots:
   - {fileID: 1160672588}
   - {fileID: 878986110}
   - {fileID: 113217393}
+  - {fileID: 1146318035}
+  - {fileID: 1343038908}
