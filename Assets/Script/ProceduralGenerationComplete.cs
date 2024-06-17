@@ -26,6 +26,7 @@ public class ProceduralGenerationComplete : MonoBehaviour
     [Header("Assets")]
     public GameObject dirt;
     public GameObject grass;
+    public GameObject gap;
     public GameObject altDirt;
     public GameObject altGrass;
     [Space(1)]
@@ -144,26 +145,26 @@ public class ProceduralGenerationComplete : MonoBehaviour
                     break;
             }
 
-            if (lastBiome == randomBiome)
-            {
-                totalBiomeWidth += biomeWidth;
-            }
-            else
-            {
-                totalBiomeWidth = biomeWidth;
-            }
+            // if (lastBiome == randomBiome)
+            // {
+            //     totalBiomeWidth += biomeWidth;
+            // }
+            // else
+            // {
+            //     totalBiomeWidth = biomeWidth;
+            // }
 
-            //alternative background biome
-            if (selectAltPlain && (
-                UnityEngine.Random.Range(0, 100) <= altPlainProbability
-                || randomBiome == Biome.HOLE && totalBiomeWidth > holePlatformAppearanceTreshold))
-            {
-                Debug.Log(">>>>>>> Adding alt plain.");
-                int plainBiomeWidth = UnityEngine.Random.Range(altMinWidth, biomeWidth);
-                int initialPos = i + UnityEngine.Random.Range(0, biomeWidth - plainBiomeWidth);
-                int initialHeight = baseHeight + UnityEngine.Random.Range(altPlainMinHeightDiff, altPlainMaxHeightDiff);
-                AddAltPlatform(initialPos, plainBiomeWidth, initialHeight);
-            }
+            // //alternative background biome
+            // if (selectAltPlain && (
+            //     UnityEngine.Random.Range(0, 100) <= altPlainProbability
+            //     || randomBiome == Biome.HOLE && totalBiomeWidth > holePlatformAppearanceTreshold))
+            // {
+            //     Debug.Log(">>>>>>> Adding alt plain.");
+            //     int plainBiomeWidth = UnityEngine.Random.Range(altMinWidth, biomeWidth);
+            //     int initialPos = i + UnityEngine.Random.Range(0, biomeWidth - plainBiomeWidth);
+            //     int initialHeight = baseHeight + UnityEngine.Random.Range(altPlainMinHeightDiff, altPlainMaxHeightDiff);
+            //     AddAltPlatform(initialPos, plainBiomeWidth, initialHeight);
+            // }
 
 
 
@@ -272,6 +273,7 @@ public class ProceduralGenerationComplete : MonoBehaviour
     private void AddHole(int initialPosX, int width)
     {
         //skip biome generation to create a hole
+         AddGap(initialPosX, width +1);
     }
 
 
@@ -315,13 +317,21 @@ public class ProceduralGenerationComplete : MonoBehaviour
 
     private void AddBasicColumns(int initialPosX, int width, int height )
     {
-        for( int i = initialPosX; i<initialPosX + width; i++)
+        for( int i = initialPosX; i<initialPosX + width ; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                SpawnObject(dirt, new Vector2(i, j));
+                  SpawnObject(dirt, new Vector2(i, j));
             }
             SpawnObject(grass, new Vector2(i, height));
+        }
+    }
+
+    private void AddGap(int initialPosX, int width)
+    {
+        for( int i = initialPosX; i<initialPosX + width; i++)
+        {
+            SpawnObject(gap, new Vector2(i, 0));
         }
     }
 

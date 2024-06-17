@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SBPCG : MonoBehaviour
+public class SBPCG_RealTime : MonoBehaviour
 {
     [Header("General settings")]
     public int width; // level length
@@ -18,77 +18,20 @@ public class SBPCG : MonoBehaviour
 
     private Vector2 spawnPosition = new Vector2(0, 0);
     const float THRESHOLD = 0.95f;
-    const float MAX_ATTEMPTS = 100;
+    const float MAX_ATTEMPTS = 300;
 
+    int[] currLevel;
+    float fitness; 
+    int steps = 0;
+    List<int[]> neighbors;
 
     // Start is called before the first frame update
     void Start()
     {
-        int[] currLevel = GetRandomLevel();
-        float fitness = EvaluateLevel(currLevel); 
+        currLevel = GetRandomLevel();
+        fitness = EvaluateLevel(currLevel); 
 
-        
-        int steps = 0;
-        while (fitness < THRESHOLD && steps < MAX_ATTEMPTS)
-        {
-            steps++;
-            List<int[]> neighbors = GetNeighbors(currLevel);
-            
-            foreach (int[] neighbor in neighbors)
-            {
-                float neighborFitness = EvaluateLevel(neighbor);
-                if (neighborFitness > fitness)
-                {
-                    currLevel = neighbor;
-                    fitness = neighborFitness;
-                    break;
-                }
-            }
-        }
-        Debug.Log("Steps: " + steps);
-        Debug.Log("Fitness: " + fitness);
-        
-
-        for (int i = 0; i < width; i++)
-        {
-            if (currLevel[i] == 0)
-            {
-                AddBasicColumns4(i);
-            }
-            else if (currLevel[i] == 1)
-            {
-                AddBlockColumns4(i);
-            }
-            else if (currLevel[i] == 2)
-            {
-                AddFlowerColumns4(i);
-            }
-            else if (currLevel[i] == 3)
-            {
-                AddBasicColumns6(i);
-            }
-            else if (currLevel[i] == 4)
-            {
-                AddBlockColumns6(i);
-            }
-            else if (currLevel[i] == 5)
-            {
-                AddFlowerColumns6(i);
-            }
-            else if (currLevel[i] == 6)
-            {
-                AddBasicGap(i);
-            }
-            else if (currLevel[i] == 7)
-            {
-                AddBlockGap(i);
-            }
-            else if (currLevel[i] == 8)
-            {
-                AddBasicColumns8(i);
-            }
-        }
-
+        StartCoroutine(WaitCoroutine(0.2f));
     }
 
     // Update is called once per frame
@@ -230,15 +173,24 @@ public class SBPCG : MonoBehaviour
         float desiredBlocks = (float)width / 4f;
         float desiredPlatforms = (float)width / 4f;
         float desiredFlowers = (float)width / 8f;
+        //float desiredSixTallGap = (float)width / 10f;
+
 
         float score = 0;
         score += 1.0f - Mathf.Abs(gaps - desiredGaps) / desiredGaps;
         score += 1.0f - Mathf.Abs(blocks - desiredBlocks) / desiredBlocks;
         score += 1.0f - Mathf.Abs(platforms - desiredPlatforms) / desiredPlatforms;
         score += 1.0f - Mathf.Abs(flowers - desiredFlowers) / desiredFlowers;
+        //score += 1.0f - Mathf.Abs(SixTallGap - desiredSixTallGap) / desiredSixTallGap;
 
         score /= 4f;
         score += scoreModifier;
+
+        // // Penalties
+        // if (flowers > desiredFlowers)
+        //  {
+        //     score -= (flowers - desiredFlowers) * 0.1f;
+        // }
 
         return score;
     }
@@ -374,4 +326,96 @@ public class SBPCG : MonoBehaviour
         obj = Instantiate(obj, position, Quaternion.identity);
         obj.transform.parent = this.transform;
     }
+
+    // wait function then execute method GenerateLevel
+     // The coroutine that performs the waiting
+    private IEnumerator WaitCoroutine(float waitTime)
+    {
+        while (fitness < THRESHOLD && steps < MAX_ATTEMPTS){
+            // Wait for the specified amount of time
+            yield return new WaitForSeconds(waitTime);
+
+            if (fitness < THRESHOLD && steps < MAX_ATTEMPTS){
+                // Iterate over all child transforms and destroy each one
+                foreach (Transform child in transform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            GenerateLevel();
+        }
+
+        
+
+    }
+
+    private void GenerateLevel(){
+        if (fitness < THRESHOLD && steps < MAX_ATTEMPTS)
+        {
+
+            steps++;
+            neighbors = GetNeighbors(currLevel);
+            
+            foreach (int[] neighbor in neighbors)
+            {
+                float neighborFitness = EvaluateLevel(neighbor);
+                if (neighborFitness > fitness)
+                {
+                    currLevel = neighbor;
+                    fitness = neighborFitness;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < width; i++)
+            {
+                if (currLevel[i] == 0)
+                {
+                    AddBasicColumns4(i);
+                }
+                else if (currLevel[i] == 1)
+                {
+                    AddBlockColumns4(i);
+                }
+                else if (currLevel[i] == 2)
+                {
+                    AddFlowerColumns4(i);
+                }
+                else if (currLevel[i] == 3)
+                {
+                    AddBasicColumns6(i);
+                }
+                else if (currLevel[i] == 4)
+                {
+                    AddBlockColumns6(i);
+                }
+                else if (currLevel[i] == 5)
+                {
+                    AddFlowerColumns6(i);
+                }
+                else if (currLevel[i] == 6)
+                {
+                    AddBasicGap(i);
+                }
+                else if (currLevel[i] == 7)
+                {
+                    AddBlockGap(i);
+                }
+                else if (currLevel[i] == 8)
+                {
+                    AddBasicColumns8(i);
+                }
+            }
+        }
+        Debug.Log("Steps: " + steps);
+        Debug.Log("Fitness: " + fitness);
+
+        
+
+        
+    }
+
 }
+
+
+

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SBPCG : MonoBehaviour
+public class SBPCG1 : MonoBehaviour
 {
     [Header("General settings")]
     public int width; // level length
@@ -18,7 +18,7 @@ public class SBPCG : MonoBehaviour
 
     private Vector2 spawnPosition = new Vector2(0, 0);
     const float THRESHOLD = 0.95f;
-    const float MAX_ATTEMPTS = 100;
+    const float MAX_ATTEMPTS = 300;
 
 
     // Start is called before the first frame update
@@ -27,8 +27,16 @@ public class SBPCG : MonoBehaviour
         int[] currLevel = GetRandomLevel();
         float fitness = EvaluateLevel(currLevel); 
 
-        
+        float temperature = 100f;
+        float decay = 0.995f;
+
         int steps = 0;
+
+        float bestFitness = fitness;
+        int[] bestLevel = currLevel;
+
+        int DEBUG_randomWalk = 0;
+        int DEBUG_hillClimb = 0;
         while (fitness < THRESHOLD && steps < MAX_ATTEMPTS)
         {
             steps++;
@@ -37,16 +45,56 @@ public class SBPCG : MonoBehaviour
             foreach (int[] neighbor in neighbors)
             {
                 float neighborFitness = EvaluateLevel(neighbor);
-                if (neighborFitness > fitness)
-                {
+                float alea = Random.Range(0.0f, 1.0f);
+                float delta = fitness - neighborFitness;
+                float chanceToChange = Mathf.Exp(-(delta/ temperature));
+                
+                Debug.Log("Chance to  change : " + chanceToChange + "  Chance to climb : " + alea+ "  Difference in fitness : " + (neighborFitness - fitness));
+
+                if(neighborFitness > fitness){
+                   
+                    if(neighborFitness > fitness){
+                        Debug.Log("Hill climbing !");
+                        DEBUG_hillClimb++;
+                    } else{ 
+                        Debug.Log("Random Walk !");
+                        DEBUG_randomWalk++;
+                    }
+
+                    currLevel = neighbor;
+                    fitness = neighborFitness;
+
+                    if(neighborFitness > bestFitness){ 
+                        bestLevel = neighbor;
+                        bestFitness = neighborFitness;
+                    }
+                    break;
+                }
+                else if (alea < chanceToChange){
+                    Debug.Log("Random Walk !");
+                    DEBUG_randomWalk++;
                     currLevel = neighbor;
                     fitness = neighborFitness;
                     break;
                 }
+                else{
+                    continue;
+                }
+                
+                
             }
+            temperature *= decay;
+            
         }
+        currLevel = bestLevel;
+        fitness = bestFitness;
+
         Debug.Log("Steps: " + steps);
         Debug.Log("Fitness: " + fitness);
+        Debug.Log("Random Walks: " + DEBUG_randomWalk);
+        Debug.Log("Hill Climbs: " + DEBUG_hillClimb);
+
+       
         
 
         for (int i = 0; i < width; i++)
@@ -155,7 +203,7 @@ public class SBPCG : MonoBehaviour
                 scoreModifier -= 0.1f;
             }
 
-            if (i<(width-4) && level[i] == 2 && level[i+1] == 2 && level[i+2] == 2 && level[i+3] == 2)
+            if (i<(width-4) && level[i] == 2 && level[i+1] == 2 && level[i+2] == 2 && level[i+3] == 2) 
             {
                 scoreModifier -= 0.1f;
             }
@@ -175,7 +223,7 @@ public class SBPCG : MonoBehaviour
                 scoreModifier -= 0.1f;
             }
 
-            if (i>1 && i<(width-1) && level[i] == 1 && level[i-1] != 1 && level[i+1]  != 1 )
+            if (i>1 && i<(width-1) && level[i] == 1 && level[i-1] != 1 && level[i+1]  != 1 ) 
             {
                 scoreModifier -= 0.1f;
             }
@@ -192,44 +240,22 @@ public class SBPCG : MonoBehaviour
             {
                 scoreModifier -= 0.1f;
             }
-            if (i>1 && i<(width-1) && level[i] == 7 && level[i-1] != 7 && level[i+1]  != 7 )
+            if (i>1 && i<(width-1) && level[i] == 7 && level[i-1] != 7 && level[i+1]  != 7 ) 
             {
                 scoreModifier -= 0.1f;
             }
-            if (i>1 && i<(width-1) && level[i] == 6 && level[i-1] != 6 && level[i+1]  != 6 )
+            if (i>1 && i<(width-1) && level[i] == 6 && level[i-1] != 6 && level[i+1]  != 6 ) 
             {
                 scoreModifier -= 0.1f;
-            }
-
-            //----------------------------
-
-            if (i>1 && i<(width-2) && level[i] == 8 && level[i-1] == 1) 
-            {
-                scoreModifier += 0.05f;
-            }
-
-            // if (i>2 && i<(width-2) && (level[i] == 6 || level[i] == 7 )  && (level[i-1] == 6 || level[i-1] == 7 ) && (level[i+1] == 6 || level[i+1] == 7 ) && (level[i-2] != 6 || level[i-2] != 7 ) && (level[i+2] != 6 || level[i+2] != 7 )) // if there is a flower but it's not 3 in a row
-            // {
-            //     scoreModifier += 0.1f;
-            // }
-
-            if (i>2 && i<(width-2) && (level[i] == 6)  && (level[i-1] == 6 ) && (level[i+1] == 6  ) && (level[i-2] != 6 ) && (level[i+2] != 6  )) 
-            {
-                scoreModifier += 0.1f;
-            }
-
-            // 4tall then 6 tall then 8 tall
-            if(i>1 && i<width-1 && level[i] == 3 && level[i-1] == 0 && level[i+1] == 8)
-            {
-                scoreModifier += 0.1f;
             }
 
         }
 
-        float desiredGaps = (float)width / 10f;
+        float desiredGaps = (float)width / 8f;
         float desiredBlocks = (float)width / 4f;
-        float desiredPlatforms = (float)width / 4f;
+        float desiredPlatforms = (float)width / 6f;
         float desiredFlowers = (float)width / 8f;
+
 
         float score = 0;
         score += 1.0f - Mathf.Abs(gaps - desiredGaps) / desiredGaps;
@@ -239,6 +265,12 @@ public class SBPCG : MonoBehaviour
 
         score /= 4f;
         score += scoreModifier;
+
+        // // Penalties
+        // if (flowers > desiredFlowers)
+        //  {
+        //     score -= (flowers - desiredFlowers) * 0.1f;
+        // }
 
         return score;
     }
@@ -309,7 +341,6 @@ public class SBPCG : MonoBehaviour
             SpawnObject(grass, new Vector2(i, height));
         }
     }
-
     public void AddBasicColumns8(int initialPosX)
     {
         height = 8;
@@ -365,6 +396,7 @@ public class SBPCG : MonoBehaviour
         AddBasicColumns6(initialPosX);
         SpawnObject(flower, new Vector2(initialPosX-1, 7));
     }
+
 
     
     

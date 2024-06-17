@@ -179,6 +179,57 @@ MonoBehaviour:
   grass: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
   flatColumn: {fileID: 1943180018997897287, guid: bd34383a634a9494e87ed1d658dda1e3, type: 3}
   gapColumn: {fileID: 1943180018997897287, guid: 364b1996627d2404281392970267e1b8, type: 3}
+--- !u!1 &160390842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160390844}
+  - component: {fileID: 160390845}
+  m_Layer: 0
+  m_Name: SBPCG RealTIme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &160390844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160390842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 165.70192, y: 36.39396, z: 0.81697714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &160390845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160390842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568793e3c189d437fbd39c76d844fa5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 100
+  height: 0
+  dirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
+  grass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
+  water: {fileID: 6358660848567398097, guid: 01e31230e0f404fe69006a874669dd6f, type: 3}
+  flower: {fileID: 8597505656953992864, guid: 19f072dc48cdd43029ca56b7e3f544ea, type: 3}
+  block: {fileID: 5000019977177368136, guid: 62202c131c194469f81a7d78cab1a82a, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1146318034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +451,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160672586}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd9bc7d477b0b43d2aafad5ee6332e01, type: 3}
   m_Name: 
@@ -454,37 +505,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 100
-  baseHeight: 0
-  plainProportion: 1
-  slopeProportion: 1
-  holeProportion: 3
-  hillProportion: 0
+  baseHeight: 10
+  plainProportion: 2
+  slopeProportion: 2
+  holeProportion: 1
+  hillProportion: 2
   valleyProportion: 0
-  selectAltPlain: 1
+  selectAltPlain: 0
   dirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
   grass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
-  altDirt: {fileID: 0}
-  altGrass: {fileID: 0}
-  plainMinWidth: 10
-  plainMaxWidth: 20
-  slopeMinWidth: 10
-  slopeMaxWidth: 30
+  gap: {fileID: 6358660848567398097, guid: 01e31230e0f404fe69006a874669dd6f, type: 3}
+  altDirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
+  altGrass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
+  plainMinWidth: 2
+  plainMaxWidth: 4
+  slopeMinWidth: 2
+  slopeMaxWidth: 4
   slopeStepMinWidth: 1
-  slopeStepMaxWidth: 3
+  slopeStepMaxWidth: 1
   slopeStepMinHeight: 1
-  slopeStepMaxHeight: 3
-  holeMinWidth: 3
-  holeMaxWidth: 7
-  holePlatformAppearanceTreshold: 5
-  hillMinWidth: 20
-  hillMaxWidth: 40
+  slopeStepMaxHeight: 4
+  holeMinWidth: 2
+  holeMaxWidth: 4
+  holePlatformAppearanceTreshold: 0
+  hillMinWidth: 5
+  hillMaxWidth: 10
   hillStepMinWidth: 2
   hillStepMaxWidth: 4
   valleyMinWidth: 15
   valleyMaxWidth: 30
   valleyStepMinWidth: 1
   valleyStepMaxWidth: 3
-  altPlainProbability: 33
+  altPlainProbability: 0
   altMinWidth: 3
   altPlainMinHeightDiff: 5
   altPlainMaxHeightDiff: 10
@@ -503,6 +555,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2041074127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041074130}
+  - component: {fileID: 2041074131}
+  m_Layer: 0
+  m_Name: SBPCG (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2041074130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041074127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 165.70192, y: 36.39396, z: 0.81697714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041074131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041074127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82eae28fd5144517b189bb8264d761e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 100
+  height: 0
+  dirt: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
+  grass: {fileID: 6431082197983898664, guid: 810f39e05106a412ebfd5cbc6dbb2511, type: 3}
+  water: {fileID: 6358660848567398097, guid: 01e31230e0f404fe69006a874669dd6f, type: 3}
+  flower: {fileID: 8597505656953992864, guid: 19f072dc48cdd43029ca56b7e3f544ea, type: 3}
+  block: {fileID: 5000019977177368136, guid: 62202c131c194469f81a7d78cab1a82a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -512,4 +615,6 @@ SceneRoots:
   - {fileID: 878986110}
   - {fileID: 113217393}
   - {fileID: 1146318035}
+  - {fileID: 160390844}
+  - {fileID: 2041074130}
   - {fileID: 1343038908}
