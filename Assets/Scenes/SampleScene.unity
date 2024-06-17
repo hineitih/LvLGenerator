@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,6 +178,61 @@ MonoBehaviour:
   grass: {fileID: 4818811958534889686, guid: 88e53135b80064a4d9a6ad773b53a1a3, type: 3}
   flatColumn: {fileID: 1943180018997897287, guid: bd34383a634a9494e87ed1d658dda1e3, type: 3}
   gapColumn: {fileID: 1943180018997897287, guid: 364b1996627d2404281392970267e1b8, type: 3}
+--- !u!1 &356681541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 356681543}
+  - component: {fileID: 356681542}
+  m_Layer: 0
+  m_Name: WaveGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &356681542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356681541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acbe59b6470f1b42bd1e89ec1cb9c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefabs:
+  - {fileID: 3584380214301199694, guid: fc02be77fc47c854c85cf1d63ed407bb, type: 3}
+  - {fileID: 5642784549813401587, guid: ea94bc6c953c6f2459519353c73e2fe0, type: 3}
+  - {fileID: 3582874813232489177, guid: 63aba37a500f27149bc0572612ca4637, type: 3}
+  - {fileID: 2867557394178888717, guid: aa4bf1ad12706c84481d0e4f37697130, type: 3}
+  - {fileID: 1943180018997897287, guid: 364b1996627d2404281392970267e1b8, type: 3}
+  - {fileID: 2381304017182614033, guid: 9f2dfcd08145d114bb07b999ff28ebe7, type: 3}
+  - {fileID: 2604842784662089238, guid: 3689ba0d4f3e72e46b2ee4c8ee8a28e8, type: 3}
+  - {fileID: 3310449536737806001, guid: ccc67a23258a749409988a2d7eff75b6, type: 3}
+  - {fileID: 3921433927694670299, guid: 59265eb6914b9fa47b582cdf200af4ee, type: 3}
+  gridSizeX: 200
+--- !u!4 &356681543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356681541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,3 +435,4 @@ SceneRoots:
   - {fileID: 1160672588}
   - {fileID: 878986110}
   - {fileID: 113217393}
+  - {fileID: 356681543}
