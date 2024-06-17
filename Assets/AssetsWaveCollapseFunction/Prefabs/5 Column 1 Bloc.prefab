@@ -494,6 +494,7 @@ MonoBehaviour:
   - {fileID: 4877156837981615818, guid: 364b1996627d2404281392970267e1b8, type: 3}
   - {fileID: 2338902400181158476, guid: 9f2dfcd08145d114bb07b999ff28ebe7, type: 3}
   - {fileID: 6490929835381284525, guid: 59265eb6914b9fa47b582cdf200af4ee, type: 3}
+  - {fileID: 8841683026923196603, guid: 3689ba0d4f3e72e46b2ee4c8ee8a28e8, type: 3}
   rightNeighbours:
   - {fileID: 4883028271851587716, guid: fc02be77fc47c854c85cf1d63ed407bb, type: 3}
   - {fileID: 589917798502935950, guid: 63aba37a500f27149bc0572612ca4637, type: 3}
